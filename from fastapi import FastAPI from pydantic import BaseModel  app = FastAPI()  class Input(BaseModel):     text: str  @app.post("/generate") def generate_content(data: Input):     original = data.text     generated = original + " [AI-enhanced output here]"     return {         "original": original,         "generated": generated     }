@@ -1,0 +1,16 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Input(BaseModel):
+    text: str
+
+@app.post("/generate")
+def generate_content(data: Input):
+    original = data.text
+    generated = original + " [AI-enhanced output here]"
+    return {
+        "original": original,
+        "generated": generated
+    }
